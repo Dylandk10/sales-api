@@ -12,8 +12,8 @@ namespace salesapi.DataHandler
 {
     public class JsonDataHandler
     {
-        private readonly List<SalesModel> _salesData;
-        private readonly List<OrderModel> _orderData;
+        private readonly List<SalesModel>? _salesData;
+        private readonly List<OrderModel>? _orderData;
         public JsonDataHandler() 
         {
             _salesData = this.GetAllSales();
@@ -48,20 +48,32 @@ namespace salesapi.DataHandler
         }
 
 
-        public List<OrderModel> OrderedByDate() 
+        public List<OrderModel>? OrderedByDate() 
         {
+
+            if(this._orderData == null) 
+            {
+                return null;
+            }
+
             var sorted = this._orderData.OrderBy(o => o.OrderNumber).ToList();
 
             return sorted;
         }
 
-        public List<SalesModel> GetSalesModels() 
+        public List<SalesModel>? GetSalesModels() 
         {
+            if(this._salesData == null) {
+                return null;
+            }
             return this._salesData;
         }
 
-        public List<OrderModel> GetOrderModels() 
+        public List<OrderModel>? GetOrderModels() 
         {
+            if(this._orderData == null) {
+                return null;
+            }
             return this._orderData;
         }
     }
